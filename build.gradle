@@ -20,7 +20,14 @@ ext {
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
-
+    signingConfigs {//签名配置
+        release {//发布版签名配置
+            storeFile file('../Launcher3-mx/launcher3.jks')//密钥文件路径
+            storePassword 'datedu'//密钥文件密码
+            keyAlias 'launcher3'//key别名
+            keyPassword 'datedu'//key密码
+        }
+    }
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
@@ -31,8 +38,13 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+
         debug {
             minifyEnabled false
+            signingConfig signingConfigs.release
         }
     }
 
@@ -41,7 +53,7 @@ android {
     productFlavors {
         aosp {
             dimension "default"
-            applicationId 'com.android.mxlauncher3'
+            applicationId 'com.android.mxlauncher2'
             testApplicationId 'com.android.launcher3.tests'
         }
         l3go {
